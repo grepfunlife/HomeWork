@@ -8,8 +8,8 @@ import javax.swing.JFrame;
 
 public class MovingFrame extends JFrame {
 
-    String direction = null;
-    int STEP = 3;
+    private PDU frame;
+    private static int STEP = 3;
 
     public MovingFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -21,14 +21,14 @@ public class MovingFrame extends JFrame {
 
         Rectangle r = getBounds();
 
-        if (direction == RIGHT) {
+        if (frame.direction == RIGHT) {
             r.x += STEP;
-        } else if (direction == LEFT) {
+        } else if (frame.direction == LEFT) {
             r.x -= STEP;
-        } else if (direction == UP) {
-            r.y += STEP;
-        } else {
+        } else if (frame.direction == UP) {
             r.y -= STEP;
+        } else {
+            r.y += STEP;
         }
         setBounds(r);
     }

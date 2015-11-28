@@ -2,15 +2,9 @@ package edu.javacourse.thread;
 
 public class MovingThread extends Thread {
 
-    private 
-            //MovingFrame 
-            PDU 
-            frame;
+    private MovingFrame frame;
 
-    public MovingThread(
-            //MovingFrame
-                    PDU
-                    frame) {
+    public MovingThread(MovingFrame frame) {
         this.frame = frame;
     }
 
