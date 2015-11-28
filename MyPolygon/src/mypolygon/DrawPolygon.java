@@ -3,69 +3,82 @@ package mypolygon;
 import java.awt.Graphics;
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 import javax.swing.JComponent;
 
 public class DrawPolygon extends JComponent
 {
-public static final String FILE_NAME = "coordinates.txt";
-public static int limit;
-//public static int[] arrayX = new int[5];
-//public static int[] arrayY = new int[5];
+    private int[] x;
+    private int[] y;
 
-    static {
-        
+    public DrawPolygon() {
+        BufferedReader br = null;
         try {
-            
-            BufferedReader br = new BufferedReader(new FileReader(FILE_NAME));
-            String str = null;
-            int i = 0;
-            while ((str = br.readLine()) != null) {
-                
-                if (!str.trim().isEmpty()) {
-                    String[] array = str.split(",\\s*");
-                    if (array.length == 1) {
-                 
-                    limit = Integer.parseInt(array[0]);
-                    System.out.println(limit);
+            br = new BufferedReader(new FileReader("coordinates.txt"));
+            String line = null;
+            int num = 0;
+            int count = 0;
+            while ((line = br.readLine()) != null) {
+                if (!line.trim().isEmpty()) {
+                String[] xy = line.split("\\s*,\\s*");
+                if (xy.length != 2) {
+                    System.out.println(line);
+                    num = Integer.parseInt(line);
+                } else {
+                    if (x == null) {
+                        x = new int[num];
+                        y = new int[num];
                     }
-                    else {
-                    int[] arrayX = new int[limit+1];
-                    int[] arrayY = new int[limit+1];
-                        arrayX[i] = Integer.parseInt(array[0]);
-                        System.out.println(arrayX[i]);
-                        arrayY[i] = Integer.parseInt(array[1]);
-                        //System.out.println(arrayY[i]);
-                        
-                    }
-                    i++;
-                    
-                    
+                    x[count] = Integer.parseInt(xy[0]);
+                    y[count] = Integer.parseInt(xy[1]);
+                    count++;
                 }
-                    
-                
             }
-            br.close();
-        } catch (Exception ex) {
+            }
+        } catch (IOException ex) {
             ex.printStackTrace();
+        } finally {
+            try {
+                br.close();
+            } catch (IOException ex) {
+            }
         }
     }
-    public static int[] getArrayX(){
-    return arrayX;
-    
-    }
-    
-    public static int[] getArrayY(){
-    return arrayY;
-    }
-    
+
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        g.drawPolygon(getArrayX(), getArrayY(), limit);
+       
+        int minX = Integer.MAX_VALUE;
+        int minY = Integer.MAX_VALUE;
+        int maxX = Integer.MIN_VALUE;
+        int maxY = Integer.MIN_VALUE;
+
+        for (int i = 0; i < x.length; i++) {
+            if (x[i] > maxX) {
+                maxX = x[i];
+            }
+            if (y[i] > maxY) {
+                maxY = y[i];
+            }
+            if (x[i] < minX) {
+                minX = x[i];
+            }
+            if (y[i] < minY) {
+                minY = y[i];
+            }
+        }
+
+        double coeffX = ((double) getWidth()) / ((double) (maxX - minX));
+        double coeffY = ((double) getHeight()) / ((double) (maxY - minY));
+
+        int[] gx = new int[x.length];
+        int[] gy = new int[y.length];
+        
+        for(int i=0; i<x.length; i++) {
+            gx[i] = (int)((x[i] - minX) * coeffX);
+            gy[i] = (int)((y[i] - minY) * coeffY);
+        }
+
+        g.drawPolygon(x, y, x.length);
     }
 }
- 
-    
-
-
-
