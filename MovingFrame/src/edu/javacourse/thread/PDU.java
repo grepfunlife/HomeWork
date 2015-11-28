@@ -49,20 +49,20 @@ public class PDU extends JFrame implements ActionListener {
 
     }
 
-//    public void moveFrame() {
-//
-//        Rectangle r = getBounds();
-//
-//        if (direction == RIGHT) {
-//            r.x += STEP;
-//        } else if (direction == LEFT) {
-//            r.x -= STEP;
-//        } else if (direction == UP) {
-//            r.y += STEP;
-//        } else {
-//            r.y -= STEP;
-//        }
-//        setBounds(r);
-//    }
+    public void moveFrame() {
+
+        Rectangle r = getBounds();
+
+        if (direction == RIGHT) {
+            r.x += STEP;
+        } else if (direction == LEFT) {
+            r.x -= STEP;
+        } else if (direction == DOWN) {
+            r.y += STEP;
+        } else {
+            r.y -= STEP;
+        }
+        setBounds(r);
+    }
 
 }

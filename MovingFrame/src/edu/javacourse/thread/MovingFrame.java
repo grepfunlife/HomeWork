@@ -13,7 +13,7 @@ public class MovingFrame extends JFrame {
 
     public MovingFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(400, 300, 250, 200);
+        setBounds(700, 300, 250, 200);
         setVisible(true);
     }
 
