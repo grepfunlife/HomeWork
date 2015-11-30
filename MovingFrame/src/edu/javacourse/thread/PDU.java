@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Locale;
 import java.util.PropertyResourceBundle;
-import java.util.ResourceBundle;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
@@ -21,21 +20,13 @@ public class PDU extends JFrame implements ActionListener {
     static String direction;
     
     public static String LOCALE;
-    public static String language = "Английский";
 
     public PDU() throws IOException {
 
         PropertyResourceBundle prb1 = (PropertyResourceBundle) PropertyResourceBundle
                 .getBundle("Locale");
 
-        if (language == "Русский") {
-            LOCALE = prb1.getString("RU");
-        } else {
-            if (language == "Английский") {
-                LOCALE = prb1.getString("EN");
-            }
-            else LOCALE = "RU";
-        } 
+         LOCALE = prb1.getString("locale");
 
         PropertyResourceBundle prb2 = (PropertyResourceBundle) PropertyResourceBundle
                 .getBundle("TitleNames", new Locale(LOCALE));
