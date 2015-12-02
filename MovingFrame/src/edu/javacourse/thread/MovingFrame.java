@@ -5,6 +5,7 @@ import static edu.javacourse.thread.PDU.RIGHT;
 import static edu.javacourse.thread.PDU.UP;
 import java.awt.Rectangle;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 public class MovingFrame extends JFrame {
 
@@ -14,7 +15,12 @@ public class MovingFrame extends JFrame {
     public MovingFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(700, 300, 250, 200);
-        setVisible(true);
+         SwingUtilities.invokeLater(new Runnable()
+        {
+            public void run() {
+                setVisible(true);
+            }
+        });
     }
 
     public void moveFrame() {

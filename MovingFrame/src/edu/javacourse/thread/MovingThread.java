@@ -1,6 +1,8 @@
 package edu.javacourse.thread;
 
-public class MovingThread extends Thread {
+public class MovingThread implements Runnable
+//extends Thread 
+{
 
     private MovingFrame frame;
 

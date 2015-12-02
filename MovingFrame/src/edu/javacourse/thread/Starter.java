@@ -8,7 +8,7 @@ public class Starter
         PDU pdu = new PDU() {};
         MovingFrame mf = new MovingFrame();
         MovingThread mt = new MovingThread(mf);
-        mt.start();
+        new Thread(mt).start();       
     }
     
 }
