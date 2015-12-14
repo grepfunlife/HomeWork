@@ -8,6 +8,7 @@ import java.util.Locale;
 import java.util.PropertyResourceBundle;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 public class PDU extends JFrame implements ActionListener {
 
@@ -58,7 +59,12 @@ public class PDU extends JFrame implements ActionListener {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(400, 300, 250, 200);
-        setVisible(true);
+         SwingUtilities.invokeLater(new Runnable()
+        {
+            public void run() {
+                setVisible(true);
+            }
+        });
     }
 
     @Override
