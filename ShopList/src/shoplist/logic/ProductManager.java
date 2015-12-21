@@ -1,36 +1,40 @@
 package shoplist.logic;
 
 import java.util.List;
+import shoplist.dao.ShopListFakeDAO;
+import shoplist.dao.ShopListProductDAO;
 import shoplist.entity.ShopListProduct;
 
 public class ProductManager {
-
-    public void addProduct(ShopListProduct product){
     
+    private ShopListProductDAO dao = new ShopListFakeDAO();
+
+    public long addProduct(ShopListProduct product){
+    return dao.addProduct(product);
     }
     
     public void updateProduct(ShopListProduct product){
-    
+    dao.updateProduct(product);
     }
     
     public void deleteProduct(ShopListProduct product){
-    
+    dao.deleteProduct(product);
     }
 
     public ShopListProduct getProduct(ShopListProduct product){
-    return null;
+    return dao.getProduct(product);
     }
 
     public List<ShopListProduct> findProducts(){
-    return null;
+    return dao.findProducts();
     }
     
     public List<ShopListProduct> findProductsInBasket(){
-    return null;
+    return dao.findProductsInBasket();
     }
     
     public ShopListProduct getProductInBasket(ShopListProduct product){
-    return null;
+    return dao.getProductInBasket(product);
     }
 
 }
