@@ -2,14 +2,16 @@ package shoplist.dao;
 
 import java.util.List;
 import shoplist.entity.ShopListProduct;
+import shoplist.exception.ShopListDAOException;
+import shoplist.filter.ShopListFilter;
 
 public interface ShopListProductDAO {
  
-    public long addProduct(ShopListProduct product);    
-    public void updateProduct(ShopListProduct product);    
-    public void deleteProduct(ShopListProduct product);
-    public ShopListProduct getProduct(ShopListProduct product);
-    public List<ShopListProduct> findProducts();    
-    public List<ShopListProduct> findProductsInBasket();
-    public ShopListProduct getProductInBasket(ShopListProduct product);
+    public long addProduct(ShopListProduct product) throws ShopListDAOException;        
+    public void updateProduct(ShopListProduct product) throws ShopListDAOException;    
+    public void deleteProduct(ShopListProduct product)throws ShopListDAOException;
+    public ShopListProduct getProduct(ShopListProduct product)throws ShopListDAOException;
+    public List<ShopListProduct> findProducts(ShopListFilter filter) throws ShopListDAOException;    
+    public List<ShopListProduct> findProductsInBasket(ShopListFilter filter) throws ShopListDAOException;
+    public ShopListProduct getProductInBasket(ShopListProduct product) throws ShopListDAOException;
 }

@@ -16,8 +16,8 @@ public class ShopList {
         long productId = facade.addProduct(product);
         product.setProductId(productId);
         facade.updateProduct(product);
-        facade.findProducts();
-        facade.deleteProduct(product);
+        facade.findProducts(null);
+        facade.deleteProduct(null);
    
         
     }

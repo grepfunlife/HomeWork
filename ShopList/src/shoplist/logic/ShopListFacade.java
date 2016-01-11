@@ -2,6 +2,7 @@ package shoplist.logic;
 
 import java.util.List;
 import shoplist.entity.ShopListProduct;
+import shoplist.filter.ShopListFilter;
 
 public class ShopListFacade {
 
@@ -9,7 +10,7 @@ public class ShopListFacade {
     private final CategoryManager categoryManager;
 
     public ShopListFacade() {
-        productManager = new ProductManager();
+        productManager = new ProductManager(); 
         categoryManager = new CategoryManager();
     }
     
@@ -30,12 +31,12 @@ public class ShopListFacade {
     return productManager.getProduct(product);
     }
 
-    public List<ShopListProduct> findProducts(){
-    return productManager.findProducts();
+    public List<ShopListProduct> findProducts(ShopListFilter filter){
+    return productManager.findProducts(filter);
     }
     
-    public List<ShopListProduct> findProductsInBasket(){
-    return productManager.findProductsInBasket();
+    public List<ShopListProduct> findProductsInBasket(ShopListFilter filter){
+    return productManager.findProductsInBasket(filter);
     }
     
     public ShopListProduct getProductInBasket(ShopListProduct product){
