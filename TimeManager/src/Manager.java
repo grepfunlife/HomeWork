@@ -56,5 +56,54 @@ public class Manager {
         return days;
     }
 
+    public List<User> getUsers() throws Exception {
+        List<User> users = new ArrayList<User>();
 
+        Statement stmt = null;
+        ResultSet rs = null;
+        try{
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("Select user_id, user_name from users");
+            while (rs.next()){
+                User u = new User();
+                u.setUserId(rs.getInt(1));
+                u.setUserName(rs.getString(2));
+
+                users.add(u);
+            }
+        } finally {
+            if (rs != null){
+                rs.close();
+            }
+            if (stmt != null){
+                stmt.close();
+            }
+        }
+        return users;
+    }
+
+    public Collection<Event> getEvents() throws Exception{
+        Collection<Event> events = new ArrayList<Event>();
+
+        Statement stmt = null;
+        ResultSet rs = null;
+        try{
+            stmt = con.createStatement();
+            rs = stmt.executeQuery("Select event_id, event_name, start_time, end_time, day_id, user_id from events order by day_id, start_time");
+            while (rs.next()){
+                Event ev = new Event(rs);
+                    events.add(ev);
+            }
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (stmt != null){
+                stmt.close();
+            }
+        }
+        return events;
+    }
+
+    
 }

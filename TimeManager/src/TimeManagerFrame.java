@@ -70,6 +70,8 @@ public class TimeManagerFrame{
         m = Manager.getInstance();
 
         System.out.println(m.getDays());
+        System.out.println(m.getUsers());
+        System.out.println(m.getEvents());
     }
 //        //System.out.println(m.getDays());
 //
