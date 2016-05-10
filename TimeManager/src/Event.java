@@ -1,3 +1,5 @@
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.Collator;
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -15,6 +17,15 @@ public class Event implements Comparable {
     private String eventName;
     private Date startTime;
     private Date endTime;
+
+    public Event(ResultSet rs) throws SQLException {
+        setDayId(rs.getInt(1));
+        setEventName(rs.getString(2));
+        setStartTime(rs.getTime(3));
+        setEndTime(rs.getTime(4));
+        setDayId(rs.getInt(5));
+        setUserId(rs.getInt(6));
+    }
 
     public int getEventId() {
         return eventId;

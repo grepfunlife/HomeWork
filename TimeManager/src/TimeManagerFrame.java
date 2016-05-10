@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Created by love_polyanskaya on 08.05.16.
  */
-public class TimeManagerFrame extends JFrame {
+public class TimeManagerFrame{
 
 //    Manager m = Manager.getInstance();
 //
@@ -56,7 +56,7 @@ public class TimeManagerFrame extends JFrame {
 //
 //    }
 //
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 ////        // Запуск формы лучше производить в специальном треде
 ////        // event-dispatching thread - EDT
 ////        SwingUtilities.invokeLater(new Runnable() {
@@ -66,7 +66,11 @@ public class TimeManagerFrame extends JFrame {
 ////                tmf.setVisible(true);
 ////            }
 ////        });
-        Manager m = Manager.getInstance();
+        Manager m = null;
+        m = Manager.getInstance();
+
+        System.out.println(m.getDays());
+    }
 //        //System.out.println(m.getDays());
 //
 //        //Один день
@@ -78,35 +82,36 @@ public class TimeManagerFrame extends JFrame {
 //                System.out.println(d);
 //                System.out.println("----------------");
 //            }
-
-        System.out.println("Список событий за день");
-        System.out.println("*******************");
-//Один день
-        int dayId=2;
-        List<Day> dd = m.getDay(dayId);
-
-        for (Day d : dd) {
-
-            System.out.println(dd);
-            System.out.println("----------------");
-        }
-
-
-
-//Список событий за день
-
-        Collection<Event> events = m.getEventsFromDay(dayId);
-
-
-        for (Event ev : events) {
-            System.out.println(ev);
-        }
-
-        }
 //
-//    }
+//        System.out.println("Список событий за день");
+//        System.out.println("*******************");
+////Один день
+//        int dayId=2;
+//        List<Day> dd = m.getDay(dayId);
+//
+//        for (Day d : dd) {
+//
+//            System.out.println(dd);
+//            System.out.println("----------------");
+//        }
+//
+//
+//
+////Список событий за день
+//
+//        Collection<Event> events = m.getEventsFromDay(dayId);
+//
+//
+//        for (Event ev : events) {
+//            System.out.println(ev);
+//        }
+//
+//        }
+////
+////    }
 
 
 
 
 }
+
