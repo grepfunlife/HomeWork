@@ -1,5 +1,6 @@
 import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 public class Manager {
 
@@ -29,7 +30,7 @@ public class Manager {
         return instance;
     }
 
-    public List<Day> getDays() throws Exception {
+    public List<Day> getDays() throws SQLException {
         List<Day> days = new ArrayList<Day>();
 
         Statement stmt = null;
@@ -56,7 +57,7 @@ public class Manager {
         return days;
     }
 
-    public List<User> getUsers() throws Exception {
+    public List<User> getUsers() throws SQLException {
         List<User> users = new ArrayList<User>();
 
         Statement stmt = null;
@@ -82,7 +83,7 @@ public class Manager {
         return users;
     }
 
-    public Collection<Event> getEvents() throws Exception{
+    public Collection<Event> getEvents() throws SQLException{
         Collection<Event> events = new ArrayList<Event>();
 
         Statement stmt = null;
@@ -105,5 +106,87 @@ public class Manager {
         return events;
     }
 
-    
+    public Collection<Event> getEventForDay(Day day) throws SQLException{
+        Collection<Event> events = new ArrayList<Event>();
+
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        try{
+            stmt = con.prepareStatement("Select event_id, event_name, start_time, end_time, day_id, user_id from events where day_id=? order by day_id, start_time");
+            stmt.setInt(1, day.getDayId());
+            rs = stmt.executeQuery();
+            while (rs.next()){
+                Event ev = new Event(rs);
+                events.add(ev);
+            }
+        } finally {
+            if (rs != null){
+                rs.close();
+            }
+            if (stmt != null){
+                stmt.close();
+            }
+        }
+        return events;
+    }
+
+    public void deletAllEvents() throws SQLException{
+        PreparedStatement stmt = null;
+        try{
+            stmt = con.prepareStatement("Delete * form events");
+            stmt.execute();
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+    }
+
+    public void insertEvent(Event event) throws SQLException {
+        PreparedStatement stmt = null;
+        try{
+            stmt = con.prepareStatement("Insert into events (event_name, start_time, end_time, day_id, user_id) values (?, ?, ?, ?, ?) ");
+            stmt.setString(1, event.getEventName());
+            stmt.setTime(2, (Time) event.getStartTime());
+            stmt.setTime(3, (Time) event.getEndTime());
+            stmt.setInt(4, event.getDayId());
+            stmt.setInt(5, event.getUserId());
+            stmt.execute();
+        } finally {
+            if (stmt != null){
+                stmt.close();
+            }
+        }
+    }
+
+    public void updateEvent(Event event) throws SQLException {
+        PreparedStatement stmt = null;
+        try{
+            stmt = con.prepareStatement("Update events set eventName=?, start_time=?, end_time=?, day_id=?, user_id=? where event_id=?");
+            stmt.setString(1, event.getEventName());
+            stmt.setTime(2, (Time) event.getStartTime());
+            stmt.setTime(3, (Time) event.getEndTime());
+            stmt.setInt(4, event.getDayId());
+            stmt.setInt(5, event.getUserId());
+            stmt.setInt(6, event.getEventId());
+            stmt.execute();
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+    }
+
+    public void deleteEvent(Event event) throws SQLException {
+        PreparedStatement stmt = null;
+        try{
+            stmt = con.prepareStatement("Delete frome events where event_id=?");
+            stmt.setInt(1, event.getEventId());
+            stmt.execute();
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+    }
 }

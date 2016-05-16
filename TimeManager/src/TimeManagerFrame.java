@@ -5,12 +5,13 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
+
 /**
  * Created by love_polyanskaya on 08.05.16.
  */
-public class TimeManagerFrame{
+public class TimeManagerFrame extends JFrame {
 
-//    Manager m = Manager.getInstance();
+//    Manager m = null;
 //
 //    private JList dList;
 //    private JList evList;
